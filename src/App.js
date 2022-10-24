@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { Button, Typography } from "@mui/material";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import { signOutFromApps, auth } from "./firebase/authentication_firebase";
 
 function App() {
+  const [user] = useAuthState(auth);
+
+  const navigate = useNavigate();
+  async function signOutHandler() {
+    await signOutFromApps();
+    navigate("/formLogin");
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Button variant="contained" onClick={signOutHandler}>
+        sign out
+      </Button>
+      <h1>ini halaman beranda</h1>
+      {/* Kita akan tampilkan email dari user di sini */}
+      {user ? (
+        <>
+          <Typography variant="body1">
+            Email - <strong>{user.email}</strong>
+          </Typography>
+          <Typography variant="body1">
+            Uid - <strong>{user.uid}</strong>
+          </Typography>
+        </>
+      ) : (
+        ""
+      )}
+    </>
   );
 }
 
