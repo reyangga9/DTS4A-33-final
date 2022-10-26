@@ -1,36 +1,49 @@
-import { Button, Typography } from "@mui/material";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
-import { signOutFromApps, auth } from "./firebase/authentication_firebase";
+import { Typography, Box } from "@mui/material";
+
+import { Nav } from "./components/Nav";
+import * as React from "react";
+
+import { useEffect } from "react";
+import { Heroes } from "./components/Heroes";
 
 function App() {
-  const [user] = useAuthState(auth);
+  // const [datas, setDatas] = useState([]);
+  // const getHeroes = async () => {
+  //   // const heroes = await fetch("https://api.opendota.com/api/heroStats");
+  //   // const value = await heroes.json();
+  //   // const results = value.map((data) => {
+  //   //   console.log(data);
+  //   //   return data;
+  //   // });
+  //   // setDatas(results);
+  // };
 
-  const navigate = useNavigate();
-  async function signOutHandler() {
-    await signOutFromApps();
-    navigate("/formLogin");
-  }
+  useEffect(() => {
+    // getHeroes();
+  }, []);
 
   return (
     <>
-      <Button variant="contained" onClick={signOutHandler}>
-        sign out
-      </Button>
-      <h1>ini halaman beranda</h1>
-      {/* Kita akan tampilkan email dari user di sini */}
-      {user ? (
-        <>
-          <Typography variant="body1">
-            Email - <strong>{user.email}</strong>
-          </Typography>
-          <Typography variant="body1">
-            Uid - <strong>{user.uid}</strong>
-          </Typography>
-        </>
-      ) : (
-        ""
-      )}
+      <Box sx={{ maxWidth: "1400px", m: "auto" }}>
+        <Nav />
+        <Box sx={{ p: 2 }}>
+          <Typography variant="h4">Dota 2 Heroes</Typography>
+        </Box>
+        {/* Dota 2 Heroes */}
+        <Box
+          sx={{
+            backgroundColor: "#e5e0e0",
+            mx: "auto",
+            display: "flex",
+
+            alignItems: "center",
+          }}
+        >
+          <Box></Box>
+          <Heroes></Heroes>
+        </Box>
+        {/* Kita akan tampilkan email dari user di sini */}
+      </Box>
     </>
   );
 }

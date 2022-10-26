@@ -7,24 +7,28 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import FormLogin from "./components/FormLogin";
 import FormRegister from "./components/FormRegister";
 import ProtectecComponent from "./components/ProtectedComponent";
+import { Provider } from "react-redux";
+import { store } from "./store/storeApi";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectecComponent>
-              <App />
-            </ProtectecComponent>
-          }
-        ></Route>
-        <Route path="/formLogin" element={<FormLogin />} />
-        <Route path="/formRegister" element={<FormRegister />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectecComponent>
+                <App />
+              </ProtectecComponent>
+            }
+          ></Route>
+          <Route path="/formLogin" element={<FormLogin />} />
+          <Route path="/formRegister" element={<FormRegister />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 

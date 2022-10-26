@@ -43,7 +43,7 @@ function FormLogin() {
 
   useEffect(() => {
     // Loading screen
-    console.log(user);
+
     if (isLoading) {
       //
       return;
