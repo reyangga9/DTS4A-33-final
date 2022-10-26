@@ -10,7 +10,6 @@ import { Box } from "@mui/system";
 
 export const Heroes = () => {
   const { data, error, isLoading } = useHeroStatsQuery();
-  let sort = [];
 
   return (
     <>
